@@ -53,5 +53,5 @@ build:
     docker push "$(docker_registry)/${CI_PROJECT_PATH}/${1}"
   }
 
-  before_script:
-    - *devops
+before_script:
+  - *devops
