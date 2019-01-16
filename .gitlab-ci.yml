@@ -32,6 +32,11 @@ build:
     echo "$(docker_registry)/${CI_PROJECT_PATH}/${1}:$(version_tag $2)"
   }
 
+  function docker_registry () {
+    echo "${REGISTRY_URI}"
+    return 0
+  }
+
   function version_tag () {
     if [[ -z "$CI_COMMIT_TAG" ]];
     then
