@@ -1,0 +1,45 @@
+version: '3.3'
+
+services:
+  vhost:
+    image: jwilder/nginx-proxy:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  minio:
+    image: minio/minio
+    depends_on:
+      - vhost
+    entrypoint: sh
+    command: -c 'mkdir -p /export/fontes-storage-development && /usr/bin/minio server /export'
+    environment:
+      MINIO_ACCESS_KEY: AKIAIOSFODNN7EXAMPLE
+      MINIO_SECRET_KEY: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+      VIRTUAL_HOST: minio.127.0.0.1.nip.io
+    ports:
+      - "9000:9000"
+    volumes:
+      - minio-data:/export
+      - minio-config:/root/.minio
+
+  niffler:
+    build: ./
+    depends_on:
+      - minio
+      - vhost
+    ports:
+      - "3000:3000"
+    environment:
+      STORAGE_SIGNEDURL_TTL: 10000
+      STORAGE_MAX_UPLOAD_SIZE: 5242880
+      STORAGE_ENDPOINT: http://minio:9000/
+      STORAGE_BUCKET: fontes-storage-development
+      STORAGE_CREDENTIALS_ACCESS_KEY_ID: AKIAIOSFODNN7EXAMPLE
+      STORAGE_CREDENTIALS_SECRET_ACCESS_KEY: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+      VIRTUAL_HOST: niffler.127.0.0.1.nip.io
+
+volumes:
+  minio-config:
+  minio-data:
