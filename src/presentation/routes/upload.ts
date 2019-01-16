@@ -1,15 +1,14 @@
 const rescue = require('express-rescue')
 const { HttpError } = require('@expresso/expresso')
 
-import { Request, Response } from 'express'
-import { Instance as MulterInstance } from 'multer'
+import { Request, Response, RequestHandler } from 'express'
 
 type ExtendedRequest = Request & { file: { key: string } }
 
-export function factory (uploadMinioMidleware: MulterInstance) {
+export function factory (uploadMinioMidleware: RequestHandler): RequestHandler[] {
   return ([
     uploadMinioMidleware,
-    rescue(async function uploadRoute (req: ExtendedRequest, res: Response) {
+    rescue(async (req: ExtendedRequest, res: Response) => {
       if(!req.file) {
         throw new HttpError.UnprocessableEntity({ message: 'missing file' })
       }

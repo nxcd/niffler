@@ -13,15 +13,13 @@ const { HttpError } = require('@expresso/expresso');
 function factory(uploadMinioMidleware) {
     return ([
         uploadMinioMidleware,
-        rescue(function uploadRoute(req, res) {
-            return __awaiter(this, void 0, void 0, function* () {
-                if (!req.file) {
-                    throw new HttpError.UnprocessableEntity({ message: 'missing file' });
-                }
-                res.status(201)
-                    .json({ id: req.file.key });
-            });
-        })
+        rescue((req, res) => __awaiter(this, void 0, void 0, function* () {
+            if (!req.file) {
+                throw new HttpError.UnprocessableEntity({ message: 'missing file' });
+            }
+            res.status(201)
+                .json({ id: req.file.key });
+        }))
     ]);
 }
 exports.factory = factory;

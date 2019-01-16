@@ -31,3 +31,4 @@ function factory({ bucket, endpoint, credentials: { accessKeyId, secretAccessKey
     return { storage, s3 };
 }
 exports.factory = factory;
+exports.default = { factory };

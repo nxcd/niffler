@@ -1,9 +1,9 @@
 import path from 'path'
 import uuid from 'uuid/v1'
-import { StorageEngine as MulterStorageEngine } from 'multer'
 import mime from 'mime-types'
 import multerS3 from 'multer-s3'
 import S3 from 'aws-sdk/clients/s3'
+import { StorageEngine as MulterStorageEngine } from 'multer'
 
 
 export interface IMulterFactoryParams {
@@ -39,3 +39,5 @@ export function factory ({ bucket, endpoint, credentials: { accessKeyId, secretA
 
   return { storage, s3 }
 }
+
+export default { factory }
