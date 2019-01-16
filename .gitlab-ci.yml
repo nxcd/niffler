@@ -37,6 +37,19 @@ build:
     return 0
   }
 
+  function version_prefix () {
+    case "$CI_COMMIT_REF_NAME" in
+      release)
+        echo "rc"
+        return 0
+        ;;
+      *)
+        echo "alpha"
+        return 0
+        ;;
+    esac
+  }
+
   function version_tag () {
     if [[ -z "$CI_COMMIT_TAG" ]];
     then
