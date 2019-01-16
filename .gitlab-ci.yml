@@ -18,18 +18,18 @@ build:
   services:
     - docker:stable-dind
   script:
-    - build niffler
-    - push_image niffler
+    - build
+    - push_image
   except:
     - master
 
 .devops: &devops |
   function build () {
-    docker build -t $(version $1) -t $(version $1 latest) ./
+    docker build -t $(version) -t $(version latest) ./
   }
 
   function version () {
-    echo "$(docker_registry)/${CI_PROJECT_PATH}/${1}:$(version_tag $2)"
+    echo "$(docker_registry)/${CI_PROJECT_PATH}:$(version_tag $1)"
   }
 
   function docker_registry () {
@@ -68,7 +68,7 @@ build:
     fi
 
     echo ${REGISTRY_PASSWORD} | docker login ${REGISTRY_URI} -u ${REGISTRY_USER} --password-stdin
-    docker push "$(docker_registry)/${CI_PROJECT_PATH}/${1}"
+    docker push "$(docker_registry)/${CI_PROJECT_PATH}"
   }
 
 before_script:
