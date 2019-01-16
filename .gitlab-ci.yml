@@ -50,3 +50,6 @@ build:
     echo ${REGISTRY_PASSWORD} | docker login ${REGISTRY_URI} -u ${REGISTRY_USER} --password-stdin
     docker push "$(docker_registry)/${CI_PROJECT_PATH}/${1}"
   }
+
+  before_script:
+    - *devops
