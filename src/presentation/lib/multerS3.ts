@@ -5,7 +5,6 @@ import multerS3 from 'multer-s3'
 import S3 from 'aws-sdk/clients/s3'
 import { StorageEngine as MulterStorageEngine } from 'multer'
 
-
 export interface IMulterFactoryParams {
   bucket: string,
   endpoint: string,
@@ -15,7 +14,7 @@ export interface IMulterFactoryParams {
   }
 }
 
-export function factory ({ bucket, endpoint, credentials: { accessKeyId, secretAccessKey }  }: IMulterFactoryParams): { storage: MulterStorageEngine, s3: S3 } {
+export function factory ({ bucket, endpoint, credentials: { accessKeyId, secretAccessKey } }: IMulterFactoryParams): { storage: MulterStorageEngine, s3: S3 } {
   const s3 = new S3({
     endpoint,
     accessKeyId,

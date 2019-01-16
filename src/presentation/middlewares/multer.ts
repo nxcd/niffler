@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express'
-import { IMulterConfig } from '../../app-config';
+import { IMulterConfig } from '../../app-config'
 import multer, { StorageEngine as MulterStorageEngine } from 'multer'
 
 export function upload (storage: MulterStorageEngine, { maxUploadSize }: IMulterConfig): RequestHandler {

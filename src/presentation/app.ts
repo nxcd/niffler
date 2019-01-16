@@ -1,6 +1,6 @@
 const expresso = require('@expresso/expresso')
 
-import { routes} from './routes'
+import { routes } from './routes'
 import { Express } from 'express'
 import multerS3 from './lib/multerS3'
 import middlewares from './middlewares'
