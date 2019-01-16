@@ -1,0 +1,52 @@
+image: node:10-alpine
+
+stages:
+  - test
+  - build
+
+lint:
+  stage: test
+  script:
+    - npx pnpm install standard --no-save --no-lock
+    - npx pnpm run lint
+  except:
+    - master
+
+build:
+  stage: build
+  image: docker:stable-git
+  services:
+    - build niffler
+    - push_image niffler
+  except:
+    - master
+
+.devops: &devops |
+  function build () {
+    docker-build -t $(version $1) -t $(version $1 latest) ./
+  }
+
+  function version () {
+    echo "$(docker_registry)/${CI_PROJECT_PATH}/${1}:$(version_tag $2)"
+  }
+
+  function version_tag () {
+    if [[ -z "$CI_COMMIT_TAG" ]];
+    then
+      if [[ -z "$1" ]];
+        then echo "$(version_prefix)-${CI_COMMIT_SHA:0:6}"
+        else echo "$(version_prefix)-$1"
+      fi
+    else
+      echo "$CI_COMMIT_TAG"
+    fi
+  }
+
+  function push_image () {
+    if [[ "$CI_COMMIT_REF_NAME" != "release" && "$CI_COMMIT_REF_NAME" != "release" && -z "$CI_COMMIT_TAG"]]; then
+      return 0
+    fi
+
+    echo ${REGISTRY_PASSWORD} | docker login ${REGISTRY_URI} -u ${REGISTRY_USER} --password-stdin
+    docker push "$(docker_registry)/${CI_PROJECT_PATH}/${1}"
+  }
