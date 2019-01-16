@@ -16,6 +16,8 @@ build:
   stage: build
   image: docker:stable-git
   services:
+    - docker:stable-dind
+  script:
     - build niffler
     - push_image niffler
   except:
