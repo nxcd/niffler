@@ -7,7 +7,7 @@ stages:
 lint:
   stage: test
   script:
-    - npx pnpm install standard --no-save --no-lock
+    - npx pnpm install standard tslint --no-save --no-lock
     - npx pnpm run lint
   except:
     - master
