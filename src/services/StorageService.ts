@@ -1,5 +1,5 @@
-import { StorageRepository, IStorageRepositoryFindConfig } from "../data/repositories/StorageRepository";
-import { IFile } from "../domain/structures/interfaces/IFile";
+import { IFile } from '../domain/structures/interfaces/IFile'
+import { StorageRepository, IStorageRepositoryFindConfig } from '../data/repositories/StorageRepository'
 
 export class StorageService {
   private readonly repository: StorageRepository

@@ -1,5 +1,5 @@
 import { S3 } from 'aws-sdk'
-import { IFile } from '../../domain/structures/interfaces/IFile';
+import { IFile } from '../../domain/structures/interfaces/IFile'
 
 export interface IStorageRepositoryFindConfig {
   ttl: number
@@ -23,13 +23,13 @@ export class StorageRepository {
     } = await this.s3.getObject({ Key: id, Bucket: this.bucket })
       .promise()
 
-    const signedUrl = await this.s3.getSignedUrl('getObject', {
+    const signedUrl = this.s3.getSignedUrl('getObject', {
       Key: id,
       Expires: ttl,
       Bucket: this.bucket
     })
 
-    const { name, enconding } = metadata || { name: '', enconding: ''}
+    const { name, enconding } = metadata || { name: '', enconding: '' }
 
     const file = {
       id,

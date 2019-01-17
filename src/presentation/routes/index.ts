@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express'
 import { IRouteFactory } from '../structures/interfaces/IRouteMap'
-import { StorageService } from '../../services/StorageService';
+import { StorageService } from '../../services/StorageService'
 
 interface IRoutes {
   upload: IRouteFactory<RequestHandler>,
