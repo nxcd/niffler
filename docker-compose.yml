@@ -29,8 +29,6 @@ services:
     depends_on:
       - minio
       - vhost
-    ports:
-      - "3000:3000"
     environment:
       STORAGE_SIGNEDURL_TTL: 10000
       STORAGE_MAX_UPLOAD_SIZE: 5242880
