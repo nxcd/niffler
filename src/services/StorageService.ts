@@ -1,5 +1,5 @@
 import { IFile } from '../domain/structures/interfaces/IFile'
-import { StorageRepository, IStorageRepositoryFindConfig } from '../data/repositories/StorageRepository'
+import { StorageRepository } from '../data/repositories/StorageRepository'
 
 export class StorageService {
   private readonly repository: StorageRepository
@@ -8,8 +8,8 @@ export class StorageService {
     this.repository = repository
   }
 
-  async find (id: string, { ttl = 60 }: IStorageRepositoryFindConfig): Promise<IFile> {
-    const file = this.repository.findById(id, { ttl })
+  async find (id: string): Promise<IFile> {
+    const file = this.repository.findById(id)
 
     return file
   }

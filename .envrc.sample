@@ -1,4 +1,4 @@
-export STORAGE_SIGNEDURL_TTL="10000"
+export STORAGE_SIGNEDURL_TTL="3600"
 export STORAGE_MAX_UPLOAD_SIZE="5242880"
 export STORAGE_BUCKET="fontes-storage-development"
 export STORAGE_ENDPOINT="http://minio.127.0.0.1.nip.io"

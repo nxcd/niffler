@@ -14,7 +14,7 @@ export const app = expresso(async (app: Express, config: IAppConfig) => {
 
   const multerMiddlewareUpload = middlewares.multer.upload(storage, { ...config.multer })
 
-  const storageRepository = new StorageRepository(s3, config.storage.bucket)
+  const storageRepository = new StorageRepository(s3, { bucket: config.storage.bucket, ttl: config.storage.signedUrlTtl })
   const storageService = new StorageService(storageRepository)
 
   app.get('/:file', routes.find.factory(storageService))
