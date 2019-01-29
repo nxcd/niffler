@@ -7,8 +7,8 @@ stages:
 lint:
   stage: test
   script:
-    - npx pnpm install standard tslint typescript tslint-config-standard tslint-eslint-rules --no-save --no-lock
-    - npx pnpm run lint
+    - npx npm install standard tslint typescript tslint-config-standard tslint-eslint-rules --no-save --no-lock
+    - npx npm run lint
   except:
     - master
 

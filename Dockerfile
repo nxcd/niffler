@@ -1,21 +1,26 @@
-FROM node:carbon-alpine
+FROM node:10-alpine AS builder
 
-ENV DEBUG expresso:*,gg:*
+ENV NODE_ENV production
+
+RUN npm i -g pnpm --unsafe-perm
+
+COPY package.json package-lock.json /tmp/app/
+RUN cd /tmp/app \
+  && pnpm install --only prod
+
+################################################################################
+
+FROM node:10-alpine
+
+ENV NODE_ENV production
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-## Install dependencies
-COPY ["./package.json", "./shrinkwrap.yaml", "/usr/src/app/"]
-
-RUN npx pnpm install
-
-## Add source code
-COPY ["./src", "./tsconfig.json", "/usr/src/app/"]
-
-## Build
-RUN npm run build:clean
+COPY . /usr/src/app
+RUN rm -rf /usr/src/app/node_modules
+COPY --from=builder /tmp/app/node_modules /usr/src/app/node_modules
 
 EXPOSE 3000
 
-ENTRYPOINT [ "npm", "start" ]
+CMD [ "npm", "start" ]
