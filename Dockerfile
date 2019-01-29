@@ -1,14 +1,12 @@
 FROM node:carbon-alpine
 
-ENV DEBUG expresso:*,gg:*
-
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-## Install dependencies
-COPY ["./package.json", "./shrinkwrap.yaml", "/usr/src/app/"]
+ENV NODE_ENV production
 
 RUN npm i -g pnpm --unsafe-perm
+
+COPY ["./package.json", "./shrinkwrap.yaml", "/usr/src/app/"]
+RUN cd /tmp/app \
+  && pnpm install --only prod
 
 RUN pnpm install --only prod
 
