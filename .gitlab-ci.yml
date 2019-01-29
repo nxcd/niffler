@@ -25,11 +25,15 @@ build:
 
 .devops: &devops |
   function build () {
-    docker build -t $(version $1) -t $(version $1 latest) -t "latest" ./
+    docker build -t $(version $1) -t $(version $1 latest) -t $(version_latest) ./
   }
 
   function version () {
     echo "$(docker_registry)/$1:$(version_tag $2)"
+  }
+
+  function version_latest () {
+    echo "$(docker_registry)/$1:latest"
   }
 
   function docker_registry () {
