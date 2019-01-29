@@ -5,8 +5,6 @@ ENV NODE_ENV production
 RUN npm i -g pnpm --unsafe-perm
 
 COPY ["./package.json", "./shrinkwrap.yaml", "/usr/src/app/"]
-RUN cd /tmp/app \
-  && pnpm install --only prod
 
 RUN pnpm install --only prod
 
