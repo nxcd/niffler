@@ -26,13 +26,14 @@ export class StorageRepository {
     } = await this.s3.getObject({ Key: id, Bucket: this.bucket })
       .promise()
 
+    const { name, enconding } = metadata || { name: '', enconding: '' }
+
     const signedUrl = this.s3.getSignedUrl('getObject', {
       Key: id,
       Expires: this.ttl,
-      Bucket: this.bucket
+      Bucket: this.bucket,
+      ResponseContentDisposition: `attachment; filename ="${name}"`
     })
-
-    const { name, enconding } = metadata || { name: '', enconding: '' }
 
     const file = {
       id,
