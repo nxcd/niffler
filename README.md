@@ -75,7 +75,7 @@ Niffler provides endpoints to communicates with storage server
 formData:
 ```json
 {
-  "file": "ARQUIVO.img" // formData file
+  "file": "ARQUIVO.img"
 }
 ```
 
