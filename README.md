@@ -1,7 +1,5 @@
 ![Logo](assets/logo.png?raw=true) ![Text](assets/nifflerText.png?raw=true)
 
-# Niffler
-
 > A minio based microservice to multi-cloud storage
 
 Niffler is a microservice that provides endpoints to manage files; it uses minio to provide a multi-cloud compatible storage solution.
