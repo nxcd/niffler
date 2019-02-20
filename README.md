@@ -8,7 +8,7 @@
 
 > A minio based microservice to multi-cloud storage
 
-Niffler is a microservice, that provides endpoints to files management, it is necessary to give you a storage and, through minio, make it multi-cloud compatible.
+Niffler is a microservice that provides endpoints to files management, it is necessary to give you a storage and, through minio, make it multi-cloud compatible.
 
 ## Usage
 
