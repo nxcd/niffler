@@ -1,8 +1,4 @@
-<div style='width: 100%; text-align: center;'>
-  <img style='margin: 0 auto;' src='./assets/logo.png'/>
-</div>
-<br/>
-<br/>
+![Logo](assets/logo.png?raw=true) ![Text](assets/nifflerText.png?raw=true)
 
 # Niffler
 
