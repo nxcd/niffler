@@ -95,7 +95,7 @@ body:
 }
 ```
 
-### GET /:id
+### GET /:fileId
 ![stability-stable](https://img.shields.io/badge/stability-stable-green.svg?style=flat-square)
 
 ##### Response
