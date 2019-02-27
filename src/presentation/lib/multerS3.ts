@@ -27,10 +27,16 @@ export function factory ({ bucket, endpoint, credentials: { accessKeyId, secretA
     s3,
     bucket,
     key: (_req, _file, cb) => cb(null, uuid()),
-    metadata: (_req, file, cb) => cb(null, {
-      name: path.basename(file.originalname),
-      enconding: file.encoding
-    }),
+    metadata: (_req, file, cb) => {
+      const fileName = path.basename(file.originalname)
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+
+      return cb(null, {
+        name: fileName,
+        enconding: file.encoding
+      })
+    },
     contentType: (_req, file, cb) => {
       return cb(null, mime.lookup(file.originalname) || multerS3.AUTO_CONTENT_TYPE.toString())
     }
