@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 RUN npm i -g pnpm --unsafe-perm
 
 ## Install dependencies
-COPY ["./package.json", "./shrinkwrap.yaml", "/usr/src/app/"]
+COPY ["./package.json", "./pnpm-lock.yaml", "/usr/src/app/"]
 
 RUN npx pnpm install
 
