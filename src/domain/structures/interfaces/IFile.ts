@@ -3,7 +3,6 @@ export interface IFile {
   name: string,
   size: number,
   mimetype: string,
-  enconding: string,
   signedUrl: string,
   createdAt: Date | string
 }

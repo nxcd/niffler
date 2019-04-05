@@ -7,7 +7,8 @@ export interface IStorageConfig {
     accessKeyId: string,
     secretAccessKey: string
   },
-  endpoint: string
+  endpoint: string,
+  hashingAlgorithm: string
 }
 
 export interface IMulterConfig {
@@ -15,19 +16,20 @@ export interface IMulterConfig {
 }
 
 export interface IAppConfig {
-  storage: IStorageConfig,
+  s3: IStorageConfig,
   multer: IMulterConfig
 }
 
 export const config: IAppConfig = {
-  storage: {
+  s3: {
     signedUrlTtl: env.get('STORAGE_SIGNEDURL_TTL', 3000),
     bucket: env.get('STORAGE_BUCKET'),
     credentials: {
       accessKeyId: env.get('STORAGE_CREDENTIALS_ACCESS_KEY_ID'),
       secretAccessKey: env.get('STORAGE_CREDENTIALS_SECRET_ACCESS_KEY')
     },
-    endpoint: env.get('STORAGE_ENDPOINT')
+    endpoint: env.get('STORAGE_ENDPOINT'),
+    hashingAlgorithm: env.get('STORAGE_HASHING_ALGORITHM', 'sha256')
   },
   multer: {
     maxUploadSize: env.get('STORAGE_MAX_UPLOAD_SIZE', 5 * 1024 * 1024)

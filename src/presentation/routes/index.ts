@@ -1,13 +1,7 @@
-import { RequestHandler } from 'express'
-import { IRouteFactory } from '../structures/interfaces/IRouteMap'
-import { StorageService } from '../../services/StorageService'
+import * as find from './find'
+import * as upload from './upload'
 
-interface IRoutes {
-  upload: IRouteFactory<RequestHandler>,
-  find: IRouteFactory<StorageService>
-}
-
-export const routes: IRoutes = {
-  upload: require('./upload'),
-  find: require('./find')
+export const routes = {
+  upload,
+  find
 }
