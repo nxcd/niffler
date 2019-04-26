@@ -1,7 +1,7 @@
 {
   "name": "niffler",
   "version": "1.2.0",
-  "description": "",
+  "description": "A minio based storage microservice",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf ./dist",
