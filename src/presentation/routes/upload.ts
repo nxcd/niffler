@@ -29,7 +29,9 @@ export function factory (s3Client: S3, { hashingAlgorithm, bucket }: IStorageCon
         file.on('data', chunk => { hash.update(chunk); passStream.write(chunk) })
         file.on('end', () => { passStream.end() })
 
-        const fileKey = uuid()
+        const subDir = req.header('x-bucket-subdir')
+
+        const fileKey = subDir ? `${subDir}/${uuid()}` : uuid()
 
         await s3Client.upload({
           Key: fileKey,
@@ -44,12 +46,13 @@ export function factory (s3Client: S3, { hashingAlgorithm, bucket }: IStorageCon
 
         const copySource = encodeURI(`${bucket}/${fileKey}`)
         const sha256 = hash.digest('hex')
+        const sha256Key = subDir ? `${subDir}/${sha256}` : sha256
 
-        await s3Client.copyObject({ Bucket: bucket, Key: sha256, CopySource: copySource }).promise()
+        await s3Client.copyObject({ Bucket: bucket, Key: sha256Key, CopySource: copySource }).promise()
         await s3Client.deleteObject({ Bucket: bucket, Key: fileKey }).promise()
 
         res.status(201)
-          .json({ id: sha256 })
+          .json({ id: sha256Key })
       })
 
       boy.on('finish', () => {
