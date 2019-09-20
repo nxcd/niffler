@@ -15,7 +15,7 @@ export function factory (s3Client: S3, { hashingAlgorithm, bucket }: IStorageCon
       const boy = new Busboy({ headers: req.headers })
       let fileWasFound = false
 
-      boy.on('file', async (fieldName, file, fileName) => {
+      boy.on('file', async (fieldName, file, fileName = '') => {
         if (fieldName !== 'file') {
           file.resume()
           return
