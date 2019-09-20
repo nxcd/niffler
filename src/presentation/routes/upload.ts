@@ -29,7 +29,7 @@ export function factory (s3Client: S3, { hashingAlgorithm, bucket }: IStorageCon
         file.on('data', chunk => { hash.update(chunk); passStream.write(chunk) })
         file.on('end', () => { passStream.end() })
 
-        const subDir = req.header('x-bucket-subdir')
+        const [ subDir ] = Object.values(req.params)
 
         const fileKey = subDir ? `${subDir}/${uuid()}` : uuid()
 
