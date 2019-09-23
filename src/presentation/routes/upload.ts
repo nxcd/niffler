@@ -15,7 +15,7 @@ export function factory (s3Client: S3, { hashingAlgorithm, bucket }: IStorageCon
       const boy = new Busboy({ headers: req.headers })
       let fileWasFound = false
 
-      boy.on('file', async (fieldName, file, fileName) => {
+      boy.on('file', async (fieldName, file, fileName = '') => {
         if (fieldName !== 'file') {
           file.resume()
           return
@@ -29,7 +29,7 @@ export function factory (s3Client: S3, { hashingAlgorithm, bucket }: IStorageCon
         file.on('data', chunk => { hash.update(chunk); passStream.write(chunk) })
         file.on('end', () => { passStream.end() })
 
-        const subDir = req.header('x-bucket-subdir')
+        const [ subDir ] = Object.values(req.params)
 
         const fileKey = subDir ? `${subDir}/${uuid()}` : uuid()
 
