@@ -1,4 +1,3 @@
-// const { server } = require('@expresso/expresso')
 import { app } from './app'
 import server from '@expresso/server'
 import { config } from '../app-config'
