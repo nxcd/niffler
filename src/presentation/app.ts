@@ -1,4 +1,4 @@
-const expresso = require('@expresso/expresso')
+import expresso from '@expresso/app'
 
 import { routes } from './routes'
 import { Express } from 'express'
