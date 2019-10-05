@@ -1,4 +1,5 @@
 const env = require('sugar-env')
+import { IExpressoConfigOptions } from '@expresso/app'
 
 export interface IStorageConfig {
   signedUrlTtl: number,
@@ -15,12 +16,13 @@ export interface IMulterConfig {
   maxUploadSize: number
 }
 
-export interface IAppConfig {
+export interface IAppConfig extends IExpressoConfigOptions {
   s3: IStorageConfig,
   multer: IMulterConfig
 }
 
 export const config: IAppConfig = {
+  name: 'niffler',
   s3: {
     signedUrlTtl: env.get('STORAGE_SIGNEDURL_TTL', 3000),
     bucket: env.get('STORAGE_BUCKET'),

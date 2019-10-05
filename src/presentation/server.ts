@@ -1,8 +1,8 @@
-const { server } = require('@expresso/expresso')
-
+// const { server } = require('@expresso/expresso')
 import { app } from './app'
+import server from '@expresso/server'
 import { config } from '../app-config'
 
 export function start () {
-  server.start(app, config)
+  return server.start(app, config)
 }
