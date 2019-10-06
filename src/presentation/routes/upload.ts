@@ -4,7 +4,7 @@ import crypto from 'crypto'
 import stream from 'stream'
 import mime from 'mime-types'
 import S3 from 'aws-sdk/clients/s3'
-const rescue = require('express-rescue')
+import rescue from 'express-rescue'
 import { IStorageConfig } from '../../app-config'
 const { HttpError } = require('@expresso/expresso')
 import { Request, Response, RequestHandler, NextFunction } from 'express'
