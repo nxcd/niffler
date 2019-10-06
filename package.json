@@ -57,7 +57,7 @@
     "express-rescue": "1.1.5",
     "lodash": "^4.17.11",
     "mime-types": "^2.1.21",
-    "sugar-env": "^1.5.3",
+    "sugar-env": "^1.5.7",
     "uuid": "^3.3.2"
   }
 }
