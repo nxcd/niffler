@@ -1,4 +1,4 @@
-const rescue = require('express-rescue')
+import rescue from 'express-rescue'
 
 import { Request, Response, RequestHandler } from 'express'
 import { StorageService } from '../../services/StorageService'
