@@ -5,8 +5,8 @@ import stream from 'stream'
 import mime from 'mime-types'
 import S3 from 'aws-sdk/clients/s3'
 import rescue from 'express-rescue'
+import { boom } from '@expresso/errors'
 import { IStorageConfig } from '../../app-config'
-const { HttpError } = require('@expresso/expresso')
 import { Request, Response, RequestHandler, NextFunction } from 'express'
 
 export function factory (s3Client: S3, { hashingAlgorithm, bucket }: IStorageConfig): RequestHandler[] {
@@ -57,7 +57,7 @@ export function factory (s3Client: S3, { hashingAlgorithm, bucket }: IStorageCon
 
       boy.on('finish', () => {
         if (!fileWasFound) {
-          next(new HttpError.UnprocessableEntity({ message: 'missing file', code: 'missing_file' }))
+          next(boom.badData('missing file', { code: 'missing_file' }))
         }
       })
 
