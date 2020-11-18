@@ -1,6 +1,6 @@
+import fs from 'fs'
 import env from 'sugar-env'
 import { IExpressoConfigOptions } from '@expresso/app'
-import fs from 'fs'
 
 export interface IStorageConfig {
   signedUrlTtl: number,
@@ -22,7 +22,7 @@ export interface IAppConfig extends IExpressoConfigOptions {
   multer: IMulterConfig
 }
 
-function buildConfigFile () :any {
+function buildConfigFile (): any {
   return JSON.parse(fs.readFileSync(configFilePath, 'utf8'))
 }
 
