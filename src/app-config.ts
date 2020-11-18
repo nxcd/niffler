@@ -29,7 +29,7 @@ function buildConfigFile (): any {
 const configFilePath = env.get('ENVIRONMENT_CONFIG_FILE')
 const configFile = configFilePath ? buildConfigFile() : {}
 
-function getEnv (envName:string, defaultValue:any) :any {
+function getEnv (envName: string, defaultValue: any): any {
   if (configFilePath) {
     return configFile[envName] || defaultValue
   }
