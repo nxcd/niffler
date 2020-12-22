@@ -22,16 +22,16 @@ export interface IAppConfig extends IExpressoConfigOptions {
   multer: IMulterConfig
 }
 
-function buildConfigFile (): any {
+function buildConfigFile (configFilePath: string): any {
   return JSON.parse(fs.readFileSync(configFilePath, 'utf8'))
 }
 
-const configFilePath = env.get('ENVIRONMENT_CONFIG_FILE')
-const configFile = configFilePath ? buildConfigFile() : {}
+const configFilePath = env.get('ENVIRONMENT_CONFIG_FILE', '').toString()
+const configFile = configFilePath ? buildConfigFile(configFilePath) : {}
 
 function getEnv (envName: string, defaultValue: any): any {
-  if (configFilePath) {
-    return configFile[envName] || defaultValue
+  if (configFilePath && configFile[envName]) {
+    return configFile[envName]
   }
 
   return env.get(envName, defaultValue)
