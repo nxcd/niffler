@@ -89,14 +89,17 @@ body:
 ![stability-stable](https://img.shields.io/badge/stability-stable-green.svg?style=flat-square)
 
 ##### Response
+
 ```json
 {
+  "data": {
     "id": "e7f01c90-3541-11e9-9067-b18bebbbc6cc",
     "name": "ARQUIVO.img",
-    "enconding": "7bit",
+    "encoding": "7bit",
     "signedUrl": "https://s3.amazonaws.com/storage-development/e7f01c90-3541-11e9-9067-b18bebbbc6cc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIPPNA2FFYMMOE2JA%2F20190220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20190220T191942Z&X-Amz-Expires=3600&X-Amz-Signature=d0b936966df8ba2be16ba6ec7866195783be2a14a9622195cd6396557eb53d90&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%20%3D%22ARQUIVOt%20%281%29.pan%22",
     "mimetype": "text/csv",
     "size": 151180,
     "createdAt": "2019-02-20T19:01:26.000Z"
+  }
 }
 ```
