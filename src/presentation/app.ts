@@ -19,4 +19,5 @@ export const app = expresso(async (app: Express, config: IAppConfig) => {
 
   app.get('/:file', routes.find.factory(storageService))
   app.post('/', routes.upload.factory(multerMiddlewareUpload))
+  app.get('/:file/download', routes.download.factory(storageService))
 })

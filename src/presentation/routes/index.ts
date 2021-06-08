@@ -3,11 +3,13 @@ import { IRouteFactory } from '../structures/interfaces/IRouteMap'
 import { StorageService } from '../../services/StorageService'
 
 interface IRoutes {
+  find: IRouteFactory<StorageService>,
   upload: IRouteFactory<RequestHandler>,
-  find: IRouteFactory<StorageService>
+  download: IRouteFactory<StorageService>
 }
 
 export const routes: IRoutes = {
+  find: require('./find'),
   upload: require('./upload'),
-  find: require('./find')
+  download: require('./download')
 }
