@@ -1,4 +1,5 @@
 import { S3 } from 'aws-sdk'
+import { Body } from 'aws-sdk/clients/s3'
 import { IFile } from '../../domain/structures/interfaces/IFile'
 
 export interface IStorageRepositoryConfig {
@@ -46,5 +47,12 @@ export class StorageRepository {
     }
 
     return file
+  }
+
+  async download (id: string): Promise<Body | undefined> {
+    const { Body: buffer } = await this.s3.getObject({ Key: id, Bucket: this.bucket })
+      .promise()
+
+    return buffer
   }
 }
