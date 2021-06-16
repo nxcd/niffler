@@ -8,7 +8,7 @@ import { Request, Response, RequestHandler, NextFunction } from 'express'
 export function factory (service: StorageService): RequestHandler[] {
   return [
     rescue(async (req: Request, res: Response) => {
-      const file = await service.find(req.params.file)
+      const file = await service.find(req.params[0])
 
       res.status(200)
         .json(file)
