@@ -14,9 +14,9 @@ export const app = expresso(async (app, config: IAppConfig, environment) => {
   const storageRepository = new StorageRepository(s3Client, { bucket: config.s3.bucket, ttl: config.s3.signedUrlTtl })
   const storageService = new StorageService(storageRepository)
 
+  app.get('/download/*', routes.download.factory(storageService))
   app.get('/*', routes.find.factory(storageService))
   app.post('/*', routes.upload.factory(s3Client, config.s3))
-  app.get('/*/download', routes.download.factory(storageService))
 
   app.use(errors(environment))
 })
