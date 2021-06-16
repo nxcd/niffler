@@ -1,3 +1,4 @@
+import fs from 'fs'
 import env from 'sugar-env'
 import { IExpressoConfigOptions } from '@expresso/app'
 
@@ -21,19 +22,34 @@ export interface IAppConfig extends IExpressoConfigOptions {
   multer: IMulterConfig
 }
 
+function buildConfigFile (configFilePath: string): any {
+  return JSON.parse(fs.readFileSync(configFilePath, 'utf8'))
+}
+
+const configFilePath = env.get('ENVIRONMENT_CONFIG_FILE', '').toString()
+const configFile = configFilePath ? buildConfigFile(configFilePath) : {}
+
+function getEnv (envName: string, defaultValue: any): any {
+  if (configFilePath && configFile[envName]) {
+    return configFile[envName]
+  }
+
+  return env.get(envName, defaultValue)
+}
+
 export const config: IAppConfig = {
   name: 'niffler',
   s3: {
-    signedUrlTtl: env.get('STORAGE_SIGNEDURL_TTL', 3000),
-    bucket: env.get('STORAGE_BUCKET', 'niffler'),
+    signedUrlTtl: getEnv('STORAGE_SIGNEDURL_TTL', 3000),
+    bucket: getEnv('STORAGE_BUCKET', 'niffler'),
     credentials: {
-      accessKeyId: env.get('STORAGE_CREDENTIALS_ACCESS_KEY_ID', ''),
-      secretAccessKey: env.get('STORAGE_CREDENTIALS_SECRET_ACCESS_KEY', '')
+      accessKeyId: getEnv('STORAGE_CREDENTIALS_ACCESS_KEY_ID', ''),
+      secretAccessKey: getEnv('STORAGE_CREDENTIALS_SECRET_ACCESS_KEY', '')
     },
-    endpoint: env.get('STORAGE_ENDPOINT', ''),
-    hashingAlgorithm: env.get('STORAGE_HASHING_ALGORITHM', 'sha256')
+    endpoint: getEnv('STORAGE_ENDPOINT', ''),
+    hashingAlgorithm: getEnv('STORAGE_HASHING_ALGORITHM', 'sha256')
   },
   multer: {
-    maxUploadSize: env.get('STORAGE_MAX_UPLOAD_SIZE', 5 * 1024 * 1024)
+    maxUploadSize: getEnv('STORAGE_MAX_UPLOAD_SIZE', 5 * 1024 * 1024)
   }
 }
