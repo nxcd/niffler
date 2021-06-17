@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@expresso/app": "^1.1.1",
-    "@expresso/errors": "^1.3.0",
+    "@expresso/errors": "^1.3.3",
     "@expresso/server": "^1.1.3",
     "@nxcd/paradox": "^2.8.3",
     "@types/mime-types": "^2.1.0",
