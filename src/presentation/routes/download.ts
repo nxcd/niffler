@@ -8,9 +8,11 @@ import { Request, Response, RequestHandler, NextFunction } from 'express'
 export function factory (service: StorageService): RequestHandler[] {
   return [
     rescue(async (req: Request, res: Response) => {
-      const file = await service.download(req.params[0])
+      const { buffer, mimetype } = await service.download(req.params[0])
 
-      res.status(200).send(file)
+      res.set({ 'Content-Type': mimetype })
+
+      res.status(200).send(buffer)
     }),
     (err: AWSError, _req: Request, _res: Response, next: NextFunction) => {
       if (err.statusCode === 404) {
