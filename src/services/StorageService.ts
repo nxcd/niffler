@@ -1,5 +1,5 @@
-import { Body } from 'aws-sdk/clients/s3'
 import { IFile } from '../domain/structures/interfaces/IFile'
+import { IFileBuffer } from '../domain/structures/interfaces/IFileBuffer'
 import { StorageRepository } from '../data/repositories/StorageRepository'
 
 export class StorageService {
@@ -13,7 +13,7 @@ export class StorageService {
     return this.repository.findById(id)
   }
 
-  async download (id: string): Promise<Body | undefined> {
+  async download (id: string): Promise<IFileBuffer> {
     return this.repository.download(id)
   }
 }
